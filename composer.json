@@ -1,0 +1,16 @@
+{
+	"name" : "fwiep/binary-solver",
+	"description" : "PHP webapplication for solving binary puzzles and showing how this is done",
+	"type" : "project",
+	"authors" : [{
+			"name" : "Frans-Willem Post",
+			"email" : "fwiep@fwiep.nl"
+		}
+	],
+	"homepage" : "https://www.fwiep.nl/",
+	"autoload" : {
+		"psr-4" : {
+			"FWieP\\" : "src"
+		}
+	}
+}
