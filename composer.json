@@ -2,12 +2,15 @@
 	"name" : "fwiep/binary-solver",
 	"description" : "PHP webapplication for solving binary puzzles and showing how this is done",
 	"type" : "project",
+	"license": "GPL-3.0-or-later",
 	"authors" : [{
 			"name" : "Frans-Willem Post",
-			"email" : "fwiep@fwiep.nl"
+			"email" : "fwiep@fwiep.nl",
+			"homepage": "https://www.fwiep.nl/",
+			"role": "developer"
 		}
 	],
-	"homepage" : "https://www.fwiep.nl/",
+	"homepage" : "https://www.fwiep.nl/binair",
 	"autoload" : {
 		"psr-4" : {
 			"FWieP\\" : "src"
