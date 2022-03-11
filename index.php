@@ -224,7 +224,7 @@ strategie deze stap de puzzel verder heeft ingevuld.</p>
     <h2 class="card-title">Opgave</h2>
     <label class="sr-only" for="txt-tosolve">Opgave:</label>
     <textarea class="pzl" rows="16" cols="16" id="txt-tosolve"
-      name="txt-tosolve"><?php print $toSolve ?></textarea>
+      name="txt-tosolve"><?php print htmlspecialchars($toSolve) ?></textarea>
   </div>
 </div>
 
