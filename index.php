@@ -21,6 +21,7 @@ setlocale(LC_ALL, array('nl_NL.utf8', 'nl_NL', 'nl', 'dutch', 'nld'));
 mb_internal_encoding('UTF-8');
 
 require_once __DIR__.'/vendor/autoload.php';
+@session_start();
 
 $toSolve = "...0...0....0.
 ...........11.
@@ -43,7 +44,13 @@ $currentStep = 0;
 $stepsCount = 0;
 $strats = P::STRATEGY_ALL_BUT_5;
 
-if ($_POST) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    
+    $token = filter_input(INPUT_POST, '_token', FILTER_DEFAULT);
+    if (!$token || $token !== $_SESSION['token']) {
+        header($_SERVER['SERVER_PROTOCOL'].' 405 Method Not Allowed');
+        exit;
+    }
     $k = 'txt-tosolve';
     $toSolve = (array_key_exists($k, $_POST) ? $_POST[$k] : '');
     $strats = 0;
@@ -68,16 +75,19 @@ if ($_POST) {
     $p->solve($strats);
     $steps = $p->getSteps();
     $stepsCount = count($steps);
-}
 
+} else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    $_SESSION['token'] = md5(uniqid(mt_rand(), true));
+}
 /**
  * Gets the checked-attribute of strategy-checkbox
  *
  * @param int $num the strategy number
  *
+ * @global $strats
  * @return string
  */
-function isStrat(int $num = 0)
+function isStrat(int $num = 0) : string
 {
     global $strats;
     $constantName = P::class.'::STRATEGY_'.$num;
@@ -216,6 +226,8 @@ strategie deze stap de puzzel verder heeft ingevuld.</p>
 </div><!-- /.collapse -->
 
 <form method="post" action="<?php print $_SERVER['PHP_SELF']?>">
+
+<input type="hidden" name="_token" value="<?php print $_SESSION['token'] ?>" />
 
 <div class="row">
 
