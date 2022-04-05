@@ -47,7 +47,10 @@ $strats = P::STRATEGY_ALL_BUT_5;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     $token = filter_input(INPUT_POST, '_token', FILTER_DEFAULT);
-    if (!$token || $token !== $_SESSION['token']) {
+    if (!$token
+        || !array_key_exists('token', $_SESSION)
+        || $token !== $_SESSION['token']
+    ) {
         header($_SERVER['SERVER_PROTOCOL'].' 405 Method Not Allowed');
         exit;
     }
