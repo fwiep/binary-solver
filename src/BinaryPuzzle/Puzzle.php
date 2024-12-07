@@ -236,7 +236,7 @@ class Puzzle
         $all = range(0, bindec($maxBinary));
         $all = array_map(
             function ($x) use ($size) {
-                return sprintf("%0${size}b", $x);
+                return sprintf("%0{$size}b", $x);
             }, $all
         );
         $all = array_filter(
